@@ -159,12 +159,12 @@ def ramasser_objet(cell):
                              # global to allow its modification
     
     inventaire.up()
-    inventaire.goto(coordInventaire[0],coordInventaire[1] - 15 * TOTAL_OBJ_COLLECT)
+    inventaire.goto(coordInventaire[0],coordInventaire[1] - 15 * TOTAL_OBJ_COLLECT) # We remove -15 to simulate a line break
     inventaire.down()
     inventaire.write("N°" + str(TOTAL_OBJ_COLLECT+1) + ": " + DICT_OBJETS[cell], font=("Verdana", 10, "normal"))
     
     annonce.clear()
-    annonce.write("Vous avez trouvé: " + DICT_OBJETS[cell], font=("Verdana", 12, "bold"))
+    annonce.write("Vous avez trouvé: " + DICT_OBJETS[cell], font=("Verdana", 12, "bold")) # We display the announce
 
     TOTAL_OBJ_COLLECT += 1
     
@@ -204,6 +204,9 @@ def win_game():
     annonce.write("Vous avez gagné !! Bravo, c'est la fête :D", font=("Verdana", 12, "bold"))
     
 class Case(Enum):
+    """
+    Enumeration of the cells, allows not to make mistakes when using these types.
+    """
     EMPTY = 0
     WALL = 1
     VICTORY = 2
