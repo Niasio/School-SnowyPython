@@ -29,7 +29,7 @@ Jimmy – [@Niasio_](https://twitter.com/Niasio_) – niasio@free.fr
 
 Distributed under the CreativeCommons CC BY 4.0 license.
 
-[https://github.com/yourname/github-link](https://github.com/Niasio/)
+[MyGit](https://github.com/Niasio/)
 
 ## Contributing
 
