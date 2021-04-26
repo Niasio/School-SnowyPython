@@ -93,7 +93,7 @@ def afficher_plan(matrice):
     """
     for i in range(len(matrice)): # Each row
         for j in range(len(matrice[i])): # Each column
-            tracer_case((i,j), COULEURS[matrice[i][j]], PAS)
+            tracer_case((i,j), COULEURS[matrice[i][j]], Pas)
             
     #TurtleScreen update
     update()
@@ -109,12 +109,12 @@ def deplacer(matrice, position, mouvement):
     if(isFree(mouvement)): # If the player can move
         characterDot.clear()
     
-        coordMouvement = coordonnes(mouvement, PAS) # Tupple of the new Turtle real player coordinate
+        coordMouvement = coordonnes(mouvement, Pas) # Tupple of the new Turtle real player coordinate
     
         characterDot.up()
-        characterDot.goto(coordMouvement[0] + PAS/2, coordMouvement[1] + PAS/2) # Divide by 2 to get to the middle
+        characterDot.goto(coordMouvement[0] + Pas/2, coordMouvement[1] + Pas/2) # Divide by 2 to get to the middle
         characterDot.down()
-        characterDot.dot(PAS * RATIO_PERSONNAGE, COULEUR_PERSONNAGE)
+        characterDot.dot(Pas * RATIO_PERSONNAGE, COULEUR_PERSONNAGE)
     
         update()
     
@@ -129,7 +129,7 @@ def isFree(cell):
     Returns: Boolean | Indicates if the player can move.
     """
     try:
-        typeOfCase = MATRICE[cell[0]][cell[1]] # Integer which will have the number of the type of cell
+        typeOfCase = Matrix[cell[0]][cell[1]] # Integer which will have the number of the type of cell
     except: # In case the player tries to go outside the plan
         return False
     
@@ -147,29 +147,29 @@ def isFree(cell):
         ramasser_objet(cell)
         return True
     else: # Other, wall (=1) for example
-        return False
+        return True
     
 def ramasser_objet(cell):
     """
     Allows you to pick up an item, display it in the inventory
     cell: Tuple | Number of the cell
     """
-    global TOTAL_OBJ_COLLECT # Total number of collected objects,
+    global TotalObjCollect # Total number of collected objects,
                              # allows the display of the object number,
                              # global to allow its modification
     
     inventaire.up()
-    inventaire.goto(coordInventaire[0],coordInventaire[1] - 15 * TOTAL_OBJ_COLLECT) # We remove -15 to simulate a line break
+    inventaire.goto(coordInventaire[0],coordInventaire[1] - 15 * TotalObjCollect) # We remove -15 to simulate a line break
     inventaire.down()
-    inventaire.write("N°" + str(TOTAL_OBJ_COLLECT+1) + ": " + DICT_OBJETS[cell], font=("Verdana", 10, "normal"))
+    inventaire.write("N°" + str(TotalObjCollect+1) + ": " + DictObjets[cell], font=("Verdana", 10, "normal"))
     
     annonce.clear()
-    annonce.write("Vous avez trouvé: " + DICT_OBJETS[cell], font=("Verdana", 12, "bold")) # We display the announce
+    annonce.write("Vous avez trouvé: " + DictObjets[cell], font=("Verdana", 12, "bold")) # We display the announce
 
-    TOTAL_OBJ_COLLECT += 1
+    TotalObjCollect += 1
     
-    tracer_case(cell, COULEUR_CASES, PAS)
-    MATRICE[cell[0]][cell[1]] = 0 # We redefine the cell to 0 because now empty
+    tracer_case(cell, COULEUR_CASES, Pas)
+    Matrix[cell[0]][cell[1]] = 0 # We redefine the cell to 0 because now empty
     
 def poser_question(case):
     """
@@ -180,12 +180,12 @@ def poser_question(case):
     annonce.clear()
     annonce.write("Cette porte est fermée.", font=("Verdana", 12, "bold"))
     
-    reponse = textinput("Porte", DICT_QUESTIONS[case][0]) # Will contain the player's answer in string
+    reponse = textinput("Porte", DictQuestions[case][0]) # Will contain the player's answer in string
     listen() # Allows you to listen to the commands again, because stopped by the question
     
-    if(reponse == DICT_QUESTIONS[case][1]): # If the answer is correct
-        tracer_case(case, COULEUR_CASES, PAS)
-        MATRICE[case[0]][case[1]] = 0 # We redefine the cell to 0 because now empty
+    if(reponse == DictQuestions[case][1]): # If the answer is correct
+        tracer_case(case, COULEUR_CASES, Pas)
+        Matrix[case[0]][case[1]] = 0 # We redefine the cell to 0 because now empty
         
         annonce.clear()
         annonce.write("La porte s'ouvre", font=("Verdana", 12, "bold"))
@@ -213,12 +213,12 @@ class Case(Enum):
     DOOR = 3
     OBJECT = 4
     
-MATRICE = lire_matrice(fichier_plan) # 2D list that contains all the values of the game cells
-PAS = calculer_pas(MATRICE) # Float of the gap between each square (= 1 side of a square)
-TOTAL_OBJ_COLLECT = 0 # Total number of collected objects
-DICT_OBJETS = creer_dictionnaire(fichier_objets) # Object dictionary, format = cell:object (tuple:string)
-DICT_QUESTIONS = creer_dictionnaire(fichier_questions) # Questions dictionary, format = cell:answer (tuple:string)
+Matrix = lire_matrice(fichier_plan) # 2D list that contains all the values of the game cells
+Pas = calculer_pas(Matrix) # Float of the gap between each square (= 1 side of a square)
+TotalObjCollect = 0 # Total number of collected objects
+DictObjets = creer_dictionnaire(fichier_objets) # Object dictionary, format = cell:object (tuple:string)
+DictQuestions = creer_dictionnaire(fichier_questions) # Questions dictionary, format = cell:answer (tuple:string)
 coordInventaire = (POINT_AFFICHAGE_INVENTAIRE[0], POINT_AFFICHAGE_INVENTAIRE[1] - 15) # Real Turtle coordinate of the first line of the inventory display
 
-afficher_plan(MATRICE)
-deplacer(MATRICE, POSITION_DEPART, POSITION_DEPART)
+afficher_plan(Matrix)
+deplacer(Matrix, POSITION_DEPART, POSITION_DEPART)
