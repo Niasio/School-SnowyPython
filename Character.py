@@ -1,4 +1,4 @@
-from GraphicPlan import *
+from GraphicPlan import * # Python script that has the function of drawing
     
 def deplacer_gauche():
     """

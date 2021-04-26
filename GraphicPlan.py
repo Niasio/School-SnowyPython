@@ -1,8 +1,8 @@
 from CONFIGS import * # All constant variables
 from turtle import * # Turtle Python Module
-from enum import Enum
-from FileDecoding import *
-from Character import *
+from enum import Enum # Allows you to create the enum of the cells
+from FileDecoding import * # Python script that decodes the files
+from Character import * # Python script that takes care of the character's movements
 
 #Turtle animation off
 #We do this to save a lot of time
@@ -106,7 +106,13 @@ def deplacer(matrice, position, mouvement):
     mouvement: Tuple | Next player position
     Returns: Tuple | Player position (changed or unchanged)
     """
-    if(isFree(mouvement)): # If the player can move
+    if(isWin(position)): # If the player is on the victory cell.
+        onkeypress(None, "Left")
+        onkeypress(None, "Right")
+        onkeypress(None, "Up")
+        onkeypress(None, "Down")
+        bye() # Bye bye Turtle
+    elif(isFree(mouvement)): # If the player can move
         characterDot.clear()
     
         coordMouvement = coordonnes(mouvement, Pas) # Tupple of the new Turtle real player coordinate
@@ -126,6 +132,7 @@ def isFree(cell):
     """
     Allows to know if a cell is available to move or not.
     Launch a specific function for a certain type of cell.
+    cell: Tuple | Number of the cell
     Returns: Boolean | Indicates if the player can move.
     """
     try:
@@ -202,6 +209,17 @@ def win_game():
     """
     annonce.clear()
     annonce.write("Vous avez gagné !! Bravo, c'est la fête :D", font=("Verdana", 12, "bold"))
+    
+def isWin(cell):
+    """
+    Allows to know if the cell is the one of victory
+    cell: Tuple | Number of the cell
+    Returns: Boolean | Tells if the player is on the victory cell or not
+    """
+    if (Matrix[cell[0]][cell[1]] == Case.VICTORY.value): # 2 = Exit / victory cell
+        return True
+    else:
+        return False
     
 class Case(Enum):
     """
