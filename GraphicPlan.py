@@ -22,30 +22,6 @@ from enum import Enum # Allows you to create the enum of the cells
 from FileDecoding import * # Python script that decodes the files
 from Character import * # Python script that takes care of the character's movements
 
-#Turtle animation off
-#We do this to save a lot of time
-tracer(0, 0)
-
-squarePencil = Turtle() # Creation of the turtle to draw the squares
-squarePencil.ht()
-squarePencil.speed(10)
-
-characterDot = Turtle() # Turtle that will be given to the player
-characterDot.ht()
-
-inventaire = Turtle() # Turtle assigned to inventory display
-inventaire.ht()
-inventaire.up()
-inventaire.goto(POINT_AFFICHAGE_INVENTAIRE[0],POINT_AFFICHAGE_INVENTAIRE[1])
-inventaire.down()
-inventaire.write("Inventaire", font=("Verdana", 10, "bold"))
-
-annonce = Turtle() # Turtle assigned to display announcements.
-annonce.ht()
-annonce.up()
-annonce.goto(POINT_AFFICHAGE_ANNONCES[0],POINT_AFFICHAGE_ANNONCES[1])
-annonce.down()
-
 def calculer_pas(matrice):
     """
     Calculates the size to be given to the cells so that the plan fits in the area of the window
@@ -181,8 +157,8 @@ def ramasser_objet(cell):
     cell: Tuple | Number of the cell
     """
     global TotalObjCollect # Total number of collected objects,
-                             # allows the display of the object number,
-                             # global to allow its modification
+                           # allows the display of the object number,
+                           # global to allow its modification
     
     inventaire.up()
     inventaire.goto(coordInventaire[0],coordInventaire[1] - 15 * TotalObjCollect) # We remove -15 to simulate a line break
@@ -249,6 +225,30 @@ class Case(Enum):
     VICTORY = 2
     DOOR = 3
     OBJECT = 4
+    
+#Turtle animation off
+#We do this to save a lot of time
+tracer(0, 0)
+
+squarePencil = Turtle() # Creation of the turtle to draw the squares
+squarePencil.ht()
+squarePencil.speed(10)
+
+characterDot = Turtle() # Turtle that will be given to the player
+characterDot.ht()
+
+inventaire = Turtle() # Turtle assigned to inventory display
+inventaire.ht()
+inventaire.up()
+inventaire.goto(POINT_AFFICHAGE_INVENTAIRE[0],POINT_AFFICHAGE_INVENTAIRE[1])
+inventaire.down()
+inventaire.write("Inventaire", font=("Verdana", 10, "bold"))
+
+annonce = Turtle() # Turtle assigned to display announcements.
+annonce.ht()
+annonce.up()
+annonce.goto(POINT_AFFICHAGE_ANNONCES[0],POINT_AFFICHAGE_ANNONCES[1])
+annonce.down()
     
 Matrix = lire_matrice(fichier_plan) # 2D list that contains all the values of the game cells
 Pas = calculer_pas(Matrix) # Float of the gap between each square (= 1 side of a square)
