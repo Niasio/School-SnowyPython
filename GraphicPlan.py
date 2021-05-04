@@ -132,7 +132,7 @@ def deplacer(position, mouvement):
         bye() # Bye bye Turtle
         return None
     elif(isFree(mouvement)): # If the player can move
-        characterDot.clear()
+        characterDot.clear() # Poof, the character disappears!
     
         coordMouvement = coordonnes(mouvement, Pas) # Tupple of the new Turtle real player coordinate
     
