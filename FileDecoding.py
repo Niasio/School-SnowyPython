@@ -1,3 +1,13 @@
+"""
+SnownyPython - Python maze game with Turtle module
+Author: Jimmy F.
+Date: 23/03/2021
+Version: 0.1
+
+This class allows to decode the files allowing
+the maze to exist
+"""
+
 from CONFIGS import * # All constant variables
 
 def tryParseToInt(number):

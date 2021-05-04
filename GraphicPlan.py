@@ -1,3 +1,14 @@
+"""
+SnownyPython - Python maze game with Turtle module
+Author: Jimmy F.
+Date: 23/03/2021
+Version: 0.1
+
+This class allows to manage all the aspect of the graph,
+drawing and events for the player. The variables are contained here:
+Matrix, Pas, TotalObjCollect, DictQuestions, DictObjets, coordInventaire
+"""
+
 from CONFIGS import * # All constant variables
 from turtle import * # Turtle Python Module
 from enum import Enum # Allows you to create the enum of the cells

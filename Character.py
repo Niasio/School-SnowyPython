@@ -1,3 +1,14 @@
+"""
+SnownyPython - Python maze game with Turtle module
+Author: Jimmy F.
+Date: 23/03/2021
+Version: 0.1
+
+This class allows to define the movements of the player
+and to define the starting position of the variable:
+characterPosition
+"""
+
 from GraphicPlan import * # Python script that has the function of drawing
     
 def deplacer_gauche():
