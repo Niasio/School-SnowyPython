@@ -5,6 +5,13 @@ Date: 23/03/2021
 Version: 0.1
 
 This class allows to execute the game
+
+Usage:
+    You have nothing to do but launch the file to play!
+Enter:
+    The Character class
+Results:
+    The game
 """
 
 from Character import *

@@ -7,6 +7,13 @@ Version: 0.1
 This class allows to manage all the aspect of the graph,
 drawing and events for the player. The variables are contained here:
 Matrix, Pas, TotalObjCollect, DictQuestions, DictObjets, coordInventaire
+
+Usage:
+    N/A
+Enter:
+    Character functions and decoded files
+Results:
+    The Graph
 """
 
 from CONFIGS import * # All constant variables
@@ -109,10 +116,9 @@ def afficher_plan(matrice):
     #TurtleScreen update
     update()
     
-def deplacer(matrice, position, mouvement):
+def deplacer(position, mouvement):
     """
     Allows to move the counter to the desired square, redraws the counter
-    matrice: 2D List | Plan matrix
     position: Tuple | Player's position
     mouvement: Tuple | Next player position
     Returns: Tuple | Player position (changed or unchanged)
@@ -122,7 +128,9 @@ def deplacer(matrice, position, mouvement):
         onkeypress(None, "Right")
         onkeypress(None, "Up")
         onkeypress(None, "Down")
+        
         bye() # Bye bye Turtle
+        return None
     elif(isFree(mouvement)): # If the player can move
         characterDot.clear()
     
@@ -165,7 +173,7 @@ def isFree(cell):
         ramasser_objet(cell)
         return True
     else: # Other, wall (=1) for example
-        return True
+        return False
     
 def ramasser_objet(cell):
     """
@@ -250,4 +258,4 @@ DictQuestions = creer_dictionnaire(fichier_questions) # Questions dictionary, fo
 coordInventaire = (POINT_AFFICHAGE_INVENTAIRE[0], POINT_AFFICHAGE_INVENTAIRE[1] - 15) # Real Turtle coordinate of the first line of the inventory display
 
 afficher_plan(Matrix)
-deplacer(Matrix, POSITION_DEPART, POSITION_DEPART)
+deplacer(POSITION_DEPART, POSITION_DEPART)

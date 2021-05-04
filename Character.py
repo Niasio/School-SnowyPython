@@ -7,6 +7,13 @@ Version: 0.1
 This class allows to define the movements of the player
 and to define the starting position of the variable:
 characterPosition
+
+Usage:
+    N/A
+Enter:
+    The functions and variables of the GraphicPlan class
+Results:
+    Player's movements
 """
 
 from GraphicPlan import * # Python script that has the function of drawing
@@ -21,9 +28,10 @@ def deplacer_gauche():
     onkeypress(None, "Left") # Allows to block the command in case of prolonged pressure, it avoids errors
     
     newPosition = (characterPosition[0], characterPosition[1] - 1) # Tupple of the calculation of the new position 
-    characterPosition = deplacer(Matrix, characterPosition, newPosition) # We redefine here by a tupple the position of the character
+    characterPosition = deplacer(characterPosition, newPosition) # We redefine here by a tupple the position of the character
     
-    onkeypress(deplacer_gauche, "Left")
+    if (characterPosition != None): # Allows to know if there is a position of returned (because if win, non-existent position)
+        onkeypress(deplacer_gauche, "Left")
     
 def deplacer_droite():
     """
@@ -35,9 +43,10 @@ def deplacer_droite():
     onkeypress(None, "Right") # Allows to block the command in case of prolonged pressure, it avoids errors
     
     newPosition = (characterPosition[0], characterPosition[1] + 1) # Tupple of the calculation of the new position 
-    characterPosition = deplacer(Matrix, characterPosition, newPosition) # We redefine here by a tupple the position of the character
+    characterPosition = deplacer(characterPosition, newPosition) # We redefine here by a tupple the position of the character
     
-    onkeypress(deplacer_droite, "Right")
+    if (characterPosition != None): # Allows to know if there is a position of returned (because if win, non-existent position)
+        onkeypress(deplacer_droite, "Right")
     
 def deplacer_haut():
     """
@@ -49,9 +58,10 @@ def deplacer_haut():
     onkeypress(None, "Up") # Allows to block the command in case of prolonged pressure, it avoids errors
     
     newPosition = (characterPosition[0] - 1, characterPosition[1]) # Tupple of the calculation of the new position 
-    characterPosition = deplacer(Matrix, characterPosition, newPosition) # We redefine here by a tupple the position of the character
+    characterPosition = deplacer(characterPosition, newPosition) # We redefine here by a tupple the position of the character
     
-    onkeypress(deplacer_haut, "Up")
+    if (characterPosition != None): # Allows to know if there is a position of returned (because if win, non-existent position)
+        onkeypress(deplacer_haut, "Up")
     
 def deplacer_bas():
     """
@@ -63,8 +73,9 @@ def deplacer_bas():
     onkeypress(None, "Down") # Allows to block the command in case of prolonged pressure, it avoids errors
     
     newPosition = (characterPosition[0] + 1, characterPosition[1]) # Tupple of the calculation of the new position 
-    characterPosition = deplacer(Matrix, characterPosition, newPosition) # We redefine here by a tupple the position of the character
+    characterPosition = deplacer(characterPosition, newPosition) # We redefine here by a tupple the position of the character
     
-    onkeypress(deplacer_bas, "Down")
+    if (characterPosition != None): # Allows to know if there is a position of returned (because if win, non-existent position)
+        onkeypress(deplacer_bas, "Down")
     
 characterPosition = POSITION_DEPART # Position of the current player

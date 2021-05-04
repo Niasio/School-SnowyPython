@@ -6,6 +6,13 @@ Version: 0.1
 
 This class allows to decode the files allowing
 the maze to exist
+
+Usage:
+    N/A
+Enter:
+    The files to decode
+Results:
+    The decoded files
 """
 
 from CONFIGS import * # All constant variables
