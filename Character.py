@@ -21,6 +21,7 @@ from GraphicPlan import * # Python script that has the function of drawing
 def deplacer_gauche():
     """
     Predicts the movement of the player going left
+    Example: deplacer_gauche() --> Move left if possible, the player
     """
     global characterPosition # Position of the current player,
                              # it must be declared in global because otherwise it cannot be modified
@@ -36,6 +37,7 @@ def deplacer_gauche():
 def deplacer_droite():
     """
     Predicts the movement of the player going right
+    Example: deplacer_droite() --> Move right if possible, the player
     """
     global characterPosition # Position of the current player,
                              # it must be declared in global because otherwise it cannot be modified
@@ -51,6 +53,7 @@ def deplacer_droite():
 def deplacer_haut():
     """
     Predicts the movement of the player going up
+    Example: deplacer_haut() --> Move up if possible, the player
     """
     global characterPosition # Position of the current player,
                              # it must be declared in global because otherwise it cannot be modified
@@ -66,6 +69,7 @@ def deplacer_haut():
 def deplacer_bas():
     """
     Predicts the movement of the player going down
+    Example: deplacer_bas() --> Move down if possible, the player
     """
     global characterPosition # Position of the current player,
                              # it must be declared in global because otherwise it cannot be modified
