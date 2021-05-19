@@ -168,18 +168,21 @@ def ramasser_objet(cell):
                            # allows the display of the object number,
                            # global to allow its modification
     
-    inventaire.up()
-    inventaire.goto(coordInventaire[0],coordInventaire[1] - 15 * TotalObjCollect) # We remove -15 to simulate a line break
-    inventaire.down()
-    inventaire.write("N°" + str(TotalObjCollect+1) + ": " + DictObjets[cell], font=("Verdana", 10, "normal"))
+    try: # We manage if the cell does not exist in the dictionary
+        inventaire.up()
+        inventaire.goto(coordInventaire[0],coordInventaire[1] - 15 * TotalObjCollect) # We remove -15 to simulate a line break
+        inventaire.down()
+        inventaire.write("N°" + str(TotalObjCollect+1) + ": " + DictObjets[cell], font=("Verdana", 10, "normal"))
     
-    annonce.clear()
-    annonce.write("Vous avez trouvé: " + DictObjets[cell], font=("Verdana", 12, "bold")) # We display the announce
+        annonce.clear()
+        annonce.write("Vous avez trouvé: " + DictObjets[cell], font=("Verdana", 12, "bold")) # We display the announce
 
-    TotalObjCollect += 1
+        TotalObjCollect += 1
     
-    tracer_case(cell, COULEUR_CASES, Pas)
-    Matrix[cell[0]][cell[1]] = 0 # We redefine the cell to 0 because now empty
+        tracer_case(cell, COULEUR_CASES, Pas)
+        Matrix[cell[0]][cell[1]] = 0 # We redefine the cell to 0 because now empty
+    except:
+        print("ERROR - No objects assigned to this cell!")
     
 def poser_question(case):
     """
@@ -188,23 +191,27 @@ def poser_question(case):
     Example: poser_question((1,5)) = True - If the player has answered the question correctly
     Returns: Boolean | Indicates whether the answer is correct or not
     """
-    annonce.clear()
-    annonce.write("Cette porte est fermée.", font=("Verdana", 12, "bold"))
-    
-    reponse = textinput("Porte", DictQuestions[case][0]) # Will contain the player's answer in string
-    listen() # Allows you to listen to the commands again, because stopped by the question
-    
-    if(reponse == DictQuestions[case][1]): # If the answer is correct
-        tracer_case(case, COULEUR_CASES, Pas)
-        Matrix[case[0]][case[1]] = 0 # We redefine the cell to 0 because now empty
-        
+    try: # We manage if the cell does not exist in the dictionary
         annonce.clear()
-        annonce.write("La porte s'ouvre", font=("Verdana", 12, "bold"))
+        annonce.write("Cette porte est fermée.", font=("Verdana", 12, "bold"))
+    
+        reponse = textinput("Porte", DictQuestions[case][0]) # Will contain the player's answer in string
+        listen() # Allows you to listen to the commands again, because stopped by the question
+    
+        if(reponse == DictQuestions[case][1]): # If the answer is correct
+            tracer_case(case, COULEUR_CASES, Pas)
+            Matrix[case[0]][case[1]] = 0 # We redefine the cell to 0 because now empty
         
-        return True
-    else: # If the answer is wrong
-        annonce.clear()
-        annonce.write("Mauvaise réponse", font=("Verdana", 12, "bold"))
+            annonce.clear()
+            annonce.write("La porte s'ouvre", font=("Verdana", 12, "bold"))
+        
+            return True
+        else: # If the answer is wrong
+            annonce.clear()
+            annonce.write("Mauvaise réponse", font=("Verdana", 12, "bold"))
+            return False
+    except:
+        print("ERROR - No door assigned to this cell, return False!")
         return False
     
 def win_game():
