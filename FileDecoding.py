@@ -17,9 +17,9 @@ Results:
 
 from CONFIGS import * # All constant variables
 
-def tryParseToInt(number):
+def tryCastToInt(number):
     """
-    Allows to parse a variable in int
+    Allows to cast variable in int
     number: Int | Number to try to parse
     Returns: Int | The int, or 0 if the parse don't work
     """
@@ -43,7 +43,7 @@ def lire_matrice(fichier):
     for i in data: # i will have the line
         IntList = [] # Matrix which will contain in item integer
         for j in i.split(): # j will have each digit of the line i
-            IntList.append(tryParseToInt(j))
+            IntList.append(tryCastToInt(j))
         
         matrix.append(IntList)
         
