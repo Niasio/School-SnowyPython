@@ -16,13 +16,14 @@ Results:
 
 from Character import *
 
-listen() #Allows you to listen to what the player is going to type on his keyboard
+if __name__ == "__main__": #Is used to execute some code only if the file was run directly, and not imported.
+    listen() #Allows you to listen to what the player is going to type on his keyboard
 
-#Definition of keys with movement functions
-onkeypress(deplacer_gauche, "Left") 
-onkeypress(deplacer_droite, "Right")
-onkeypress(deplacer_haut, "Up")
-onkeypress(deplacer_bas, "Down")
+    #Definition of keys with movement functions
+    onkeypress(deplacer_gauche, "Left") 
+    onkeypress(deplacer_droite, "Right")
+    onkeypress(deplacer_haut, "Up")
+    onkeypress(deplacer_bas, "Down")
 
-mainloop() #Tells the window to wait for the user to do something,
-           #although in this case there’s not much for the user to do except close the window
+    mainloop() #Tells the window to wait for the user to do something,
+               #although in this case there’s not much for the user to do except close the window
