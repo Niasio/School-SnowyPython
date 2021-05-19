@@ -21,6 +21,7 @@ def tryCastToInt(number):
     """
     Allows to cast variable in int
     number: Int | Number to try to parse
+    Example: tryCastToInt("6") = 6
     Returns: Int | The int, or 0 if the parse don't work
     """
     try:
@@ -33,6 +34,7 @@ def lire_matrice(fichier):
     """
     Allows to interpret the file in a matrix
     fichier: String | File name to read
+    Example: lire_matrice("plan_chateau.txt") = [[1,0,1,1],[0,0,1,0]]
     Returns: 2D List | Matrix
     """
     matrix = [] # Matrix (2D list) of the game plan
@@ -53,6 +55,7 @@ def creer_dictionnaire(fichier_des_objets):
     """
     Reads and interprets the object file
     fichier_des_objets: String | File name
+    Example: creer_dictionnaire("dico_portes.txt") = {(3, 4): ('Lequel est un mot réservé Python : elif ou elsif ?', 'elif'), .....}
     Returns: Dictionary | Item dictionary for Object or Questions, format = cell:item (tuple:string)
     """
     dictObj = {} # Item dictionary, format = cell:item (tuple:string)
