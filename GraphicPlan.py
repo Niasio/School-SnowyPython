@@ -25,7 +25,8 @@ from Character import * # Python script that takes care of the character's movem
 def calculer_pas(matrice):
     """
     Calculates the size to be given to the cells so that the plan fits in the area of the window
-    matrice: 2D List | Plan matrix 
+    matrice: 2D List | Plan matrix
+    Example: calculer_pas([[1,0,1,1],[0,0,1,0]]) = 72.5
     Returns: Float | Size
     """
     height = len(matrice) # Height of the game plan
@@ -41,6 +42,7 @@ def coordonnes(case, pas):
     Calculates the coordinates (in pixels) of the lower left corner of a cell
     case: Tuple | Number of the cell
     pas: Float | Dimension of the square
+    Example: coordonnes((1,5), 72.5) = (122.5, 55.0)
     Returns: Tuple | Coordinates
     """
     realCoord = [] # List of x ; y coordinates,
@@ -55,6 +57,7 @@ def tracer_carre(dimension):
     """
     Allows you to draw a square with the Turtle "squarePencil"
     dimension: Float | Dimension of the square
+    Example: tracer_carre(15) --> Draw a square of 15 pixels on the window
     """
     squarePencil.begin_fill()
     for i in range(4): # In range 4 allows to draw the 4 sides of the square
@@ -68,6 +71,7 @@ def tracer_case(case, couleur, pas):
     case: Tuple | Number of the cell
     couleur: String | Color of the cell
     pas: Float | Dimension of the square
+    Example: tracer_case((1,5), "red", 15) --> Draw the (1,5) red cell of a 15 pixel square
     """
     coord = coordonnes(case,pas) # Tuple who will have the real Turtle coordinates
     
@@ -83,7 +87,8 @@ def tracer_case(case, couleur, pas):
 def afficher_plan(matrice):
     """
     Display the plan
-    matrice: 2D List | Plan matrix 
+    matrice: 2D List | Plan matrix
+    Example: afficher_plan([[1,0,1,1],[0,0,1,0]]) --> Allows to display the whole plan thanks to the matrix
     """
     for i in range(len(matrice)): # Each row
         for j in range(len(matrice[i])): # Each column
@@ -97,6 +102,7 @@ def deplacer(position, mouvement):
     Allows to move the counter to the desired square, redraws the counter
     position: Tuple | Player's position
     mouvement: Tuple | Next player position
+    Example: deplacer((1,5), (1,6)) = (1,5) or (1,6) if the move is possible
     Returns: Tuple | Player position (changed or unchanged)
     """
     if(isWin(position)): # If the player is on the victory cell.
@@ -128,6 +134,7 @@ def isFree(cell):
     Allows to know if a cell is available to move or not.
     Launch a specific function for a certain type of cell.
     cell: Tuple | Number of the cell
+    Example: isFree((1,5)) = True - If free cell for the character
     Returns: Boolean | Indicates if the player can move.
     """
     try:
@@ -155,6 +162,7 @@ def ramasser_objet(cell):
     """
     Allows you to pick up an item, display it in the inventory
     cell: Tuple | Number of the cell
+    Example: ramasser_objet((1,6)) --> Allows to write next to the plan the recovered object
     """
     global TotalObjCollect # Total number of collected objects,
                            # allows the display of the object number,
@@ -177,6 +185,7 @@ def poser_question(case):
     """
     Ask a question to the player and return if the answer is correct or not
     case: Tuple | Number of the cell
+    Example: poser_question((1,5)) = True - If the player has answered the question correctly
     Returns: Boolean | Indicates whether the answer is correct or not
     """
     annonce.clear()
@@ -201,6 +210,7 @@ def poser_question(case):
 def win_game():
     """
     Shows the player that he has won
+    Example: win_game() --> Tells the player that he has won
     """
     annonce.clear()
     annonce.write("Vous avez gagné !! Bravo, c'est la fête :D", font=("Verdana", 12, "bold"))
@@ -209,6 +219,7 @@ def isWin(cell):
     """
     Allows to know if the cell is the one of victory
     cell: Tuple | Number of the cell
+    Exemple: isWin((1,5)) = True - If the player is on the winning cell
     Returns: Boolean | Tells if the player is on the victory cell or not
     """
     if (Matrix[cell[0]][cell[1]] == Case.VICTORY.value): # 2 = Exit / victory cell
@@ -219,6 +230,7 @@ def isWin(cell):
 class Case(Enum):
     """
     Enumeration of the cells, allows not to make mistakes when using these types.
+    Example: Case.DOOR.value = 3
     """
     EMPTY = 0
     WALL = 1
@@ -257,5 +269,5 @@ DictObjets = creer_dictionnaire(fichier_objets) # Object dictionary, format = ce
 DictQuestions = creer_dictionnaire(fichier_questions) # Questions dictionary, format = cell:answer (tuple:string)
 coordInventaire = (POINT_AFFICHAGE_INVENTAIRE[0], POINT_AFFICHAGE_INVENTAIRE[1] - 15) # Real Turtle coordinate of the first line of the inventory display
 
-afficher_plan(Matrix)
-deplacer(POSITION_DEPART, POSITION_DEPART)
+afficher_plan(Matrix) # Display the plan thanks to the matrix recovered by the file
+deplacer(POSITION_DEPART, POSITION_DEPART) # Moves the player to the starting position
